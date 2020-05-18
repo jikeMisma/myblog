@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html>
-	<head>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+	<head th:replace="admin/_fragements :: head(~{::title})">
 		<meta charset="utf-8">
-		<title>博客管理</title>
-		<meta name="viewport" content="width = device-width,initial-scale=1.0" />
+		<title>博客管理登录</title>
+		<meta name="viewport" content="width = device-width,initial-scale=1.0"/>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+		<link rel="stylesheet" href="../../static/css/me.css"/>
 	</head>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
 	<link rel="stylesheet" href="../../static/css/me.css" />
@@ -12,7 +14,7 @@
 
 	<body>
 		<!-- 导航 -->
-		<nav class="ui inverted attached segment m-padded-tb-min m-shadow-small">
+		<nav th:replace="admin/_fragements :: menu(1)" class="ui inverted attached segment m-padded-tb-min m-shadow-small">
 			<div class="ui container">
 				<div class="ui inverted secondary stackable menu">
 					<h2 class="ui teal header item">管理后台</h2>
@@ -162,8 +164,11 @@
 				<p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright @ 2019-2020 by mzc.hnust</p>
 			</div>
 		</footer>
+
+		<!--/*/<th:block th:replcae="_fragements :: script">/*/-->
 		<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+		<!--/*/</th:block>/*/-->
 
 		<script>
 			$('.menu.toggle').click(function() {
