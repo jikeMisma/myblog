@@ -56,7 +56,11 @@
 		<!-- 中间内容 -->
 		<div class="m-container-small m-padded-tn-big">
 			<div class="ui container">
-				
+				<div class="ui success message" th:unless="${#strings.isEmpty(message)}">
+					<i class="close icon"></i>
+					<div class="header">提示：</div>
+					<p th:text="${message}">恭喜，操作成功！</p>
+				</div>
 				<table class="ui celled table">
 					<thead>
 						<tr>
@@ -131,7 +135,7 @@
 		<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
 		<!--/*/</th:block>/*/-->
-
+		<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 		<script>
 			$('.menu.toggle').click(function() {
 				$('.m-item').toggleClass('m-mobile-hide');
@@ -140,6 +144,14 @@
 			$('.ui.dropdown').dropdown({
 				on:'hover'
 			});
+
+			//消息关闭初始化
+			$('.message .close')
+					.on('click',function () {
+						$(this)
+								.closest('.message')
+								.transition('fade');
+					});
 		</script>
 
 
