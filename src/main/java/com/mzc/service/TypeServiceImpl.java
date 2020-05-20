@@ -5,7 +5,6 @@ import com.mzc.dao.TypeRepository;
 import com.mzc.po.Type;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
