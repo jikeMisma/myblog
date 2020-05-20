@@ -36,6 +36,12 @@ public class TypeServiceImpl implements TypeService {
     }
 
     @Override
+    public Type getTypeByName(String name) {
+        return typeRepository.findByName(name);
+    }
+
+
+    @Override
     @Transactional
     public Page<Type> listType(org.springframework.data.domain.Pageable pageable) {
         return typeRepository.findAll((org.springframework.data.domain.Pageable) pageable);

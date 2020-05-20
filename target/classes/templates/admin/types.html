@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 	<head th:replace="admin/_fragements :: head(~{::title})">
 		<meta charset="utf-8">
 		<title>分类管理</title>
@@ -45,8 +45,8 @@
 		<div class="ui attached pointing menu">
 			<div class="ui container">
 				<div class="right menu">
-					<a href="#" class="item">发布</a>
-					<a href="#" class="active teal item">博客管理</a>
+					<a href="#" th:href="@{/admin/types/input}" class="item">新增</a>
+					<a href="#" th:href="@{/admin/types}" class="active teal item">列表</a>
 				</div>
 				
 			</div>
@@ -103,7 +103,7 @@
 			<div class="ui center aligned container">
 				<div class="ui inverted divided stackable grid">
 					<div class="three wide column">
-						<img src="../../static/images/wecaht.png" class="ui centered rounded image" style="width: 110px;" />
+						<img src="../../static/images/wecaht.png" th:src="@{/images/wecaht.png}" class="ui centered rounded image" style="width: 110px;" />
 					</div>
 					<div class="four wide column">
 						<h4 class="ui inverted header">最新博客</h4>
@@ -150,7 +150,7 @@
 					.on('click',function () {
 						$(this)
 								.closest('.message')
-								.transaction('fade');
+								.transition('fade');
 					});
 		</script>
 
