@@ -4,6 +4,7 @@ import com.mzc.ClassNotFoundException;
 import com.mzc.dao.BlogRepository;
 import com.mzc.po.Blog;
 import com.mzc.po.Type;
+import com.mzc.vo.BlogQuery;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -33,7 +34,7 @@ public class BlogServiceImpl implements  BlogService {
     }
 
     @Override
-    public Page<Blog> listBlog(Pageable pageable, Blog blog) {
+    public Page<Blog> listBlog(Pageable pageable, BlogQuery blog) {
         return blogRepository.findAll(new Specification<Blog>() {
             @Override
             //CriteriaQuery：查询的条件容器
@@ -44,12 +45,12 @@ public class BlogServiceImpl implements  BlogService {
                     predicates.add(cb.like(root.<String>get("title"),"%"+blog.getTitle()));
                 }
 
-                if(blog.getType().getId() !=null){
-                    predicates.add(cb.equal(root.<Type>get("type").get("id"),blog.getType().getId()));
+                if(blog.getTypeId() !=null){
+                    predicates.add(cb.equal(root.<Type>get("type").get("id"),blog.getTypeId()));
                 }
 
                 if(blog.isRecommened()){
-                    predicates.add(cb.equal(root.<Boolean>get("recommend"),blog.isRecommened()));
+                    predicates.add(cb.equal(root.<Boolean>get("recommened"),blog.isRecommened()));
                 }
                 query.where(predicates.toArray(new Predicate[predicates.size()]));
                 return null;

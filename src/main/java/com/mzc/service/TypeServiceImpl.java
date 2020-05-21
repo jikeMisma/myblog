@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.awt.print.Pageable;
+import java.util.List;
 
 /**
  * @author mazhicheng
@@ -44,6 +45,11 @@ public class TypeServiceImpl implements TypeService {
     @Transactional
     public Page<Type> listType(org.springframework.data.domain.Pageable pageable) {
         return typeRepository.findAll((org.springframework.data.domain.Pageable) pageable);
+    }
+
+    @Override
+    public List<Type> listType() {
+        return typeRepository.findAll();
     }
 
 
