@@ -5,10 +5,9 @@
     <title th:replace="${title}">博客详情</title>
     <meta name="viewport" content="width = device-width,initial-scale=1.0"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
-    <link rel="stylesheet" href="../static/css/typo.css" th:href="@{/css/typo.css}"/>
     <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}"/>
-    <link rel="stylesheet" href="../static/lib/prism/prism.css" th:href="@{lib/prism/prism.css}"/>
-    <link rel="stylesheet" href="../static/lib/tocbot/tocbot.css" th:href="@{/lib/tocbot/tocbot.css}"/>
+    <link rel="stylesheet" href="../../static/lib/editormd/css/editormd.min.css"  th:href="@{/lib/editormd/css/editormd.min.css}"/>
+    <link rel="stylesheet" href="../../static/lib/editormd/css/editormd.css" th:href="@{/lib/editormd/css/editormd.css}" />
 </head>
 <body>
 
@@ -41,6 +40,13 @@
 
     </nav>
 
+
+<th:block th:fragment="script">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+    <script src="../../static/lib/editormd/editormd.min.js" th:src="@{/lib/editormd/editormd.min.js}"></script>
+
+</th:block>
 
 </body>
 </html>
