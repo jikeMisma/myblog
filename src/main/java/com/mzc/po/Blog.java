@@ -47,7 +47,7 @@ public class Blog {
     private List<comment> comments = new ArrayList<>();
 
     @Transient
-    private String getTagIds;
+    private String tagIds;
 
     public Blog() {
 
@@ -189,12 +189,36 @@ public class Blog {
         this.comments = comments;
     }
 
-    public String getGetTagIds() {
-        return getTagIds;
+    public String getTagIds() {
+        return tagIds;
     }
 
-    public void setGetTagIds(String getTagIds) {
-        this.getTagIds = getTagIds;
+    public void setTagIds(String tagIds) {
+        this.tagIds = tagIds;
+    }
+
+    //初始化
+    public void init(){
+
+        this.tagIds = tagsToIds(this.getTages());
+    }
+
+    private String tagsToIds(List<Tag> tags){
+        if(!tags.isEmpty()){
+            StringBuffer ids = new StringBuffer();
+            boolean flag = false;
+            for(Tag tag:tags){
+                if(flag){
+                    ids.append(",");
+                }else{
+                    flag = true;
+                }
+                ids.append(tag.getId());
+            }
+            return ids.toString();
+        }else{
+            return tagIds;
+        }
     }
 
     @Override

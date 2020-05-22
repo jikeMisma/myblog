@@ -13,6 +13,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -50,7 +51,7 @@ public class BlogController {
     }
 
     @PostMapping("/blogs/search")
-    public String search(@PageableDefault(size = 2,sort = {"updateTime"},direction = Sort.Direction.DESC) Pageable pageable, BlogQuery blog, Model model){
+    public String search(@PageableDefault(size = 6,sort = {"updateTime"},direction = Sort.Direction.DESC) Pageable pageable, BlogQuery blog, Model model){
         model.addAttribute("page",blogService.listBlog(pageable,blog));
         return "admin/blogs :: blogList";
     }
@@ -58,9 +59,23 @@ public class BlogController {
     //跳转至发布页面
     @GetMapping("/blogs/input")
     public  String input(Model model){
+        setTypeAndTag(model);
+        model.addAttribute("blog",new Blog());
+        return INPUT;
+    }
+
+    private void setTypeAndTag(Model model){
         model.addAttribute("types",typeService.listType());
         model.addAttribute("tags",tagService.listTag());
-        model.addAttribute("blog",new Blog());
+    }
+
+    //跳转编辑页面
+    @GetMapping("/blogs/{id}/input")
+    public  String editInput(@PathVariable Long id, Model model){
+        setTypeAndTag(model);
+        Blog blog = blogService.getBlog(id);
+        blog.init();
+        model.addAttribute("blog",blog);
         return INPUT;
     }
 
@@ -69,7 +84,7 @@ public class BlogController {
 
         blog.setUser((User)session.getAttribute("user"));
         blog.setType(typeService.getType(blog.getType().getId()));
-        blog.setTages(tagService.listTag(blog.getGetTagIds()));
+        blog.setTages(tagService.listTag(blog.getTagIds()));
 
         Blog b= blogService.saveBlog(blog);
         if(b == null){
