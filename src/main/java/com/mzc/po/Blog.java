@@ -1,5 +1,6 @@
 package com.mzc.po;
 
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,6 +19,7 @@ public class Blog {
     private Long id;
     @Column(length = 60,name = "title")
     private String title;
+
     private String content;
     private String firstPicture;
     private String flag;
@@ -43,6 +45,9 @@ public class Blog {
 
     @OneToMany(mappedBy = "blog")
     private List<comment> comments = new ArrayList<>();
+
+    @Transient
+    private String getTagIds;
 
     public Blog() {
 
@@ -182,6 +187,14 @@ public class Blog {
 
     public void setComments(List<comment> comments) {
         this.comments = comments;
+    }
+
+    public String getGetTagIds() {
+        return getTagIds;
+    }
+
+    public void setGetTagIds(String getTagIds) {
+        this.getTagIds = getTagIds;
     }
 
     @Override

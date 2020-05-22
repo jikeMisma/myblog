@@ -3,13 +3,13 @@ package com.mzc.service;
 import com.mzc.ClassNotFoundException;
 import com.mzc.dao.TagRepository;
 import com.mzc.po.Tag;
-import com.mzc.po.Type;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -52,6 +52,24 @@ public class TagServiceImpl implements TagService {
     @Override
     public List<Tag> listTag() {
         return tagRepository.findAll();
+    }
+
+    @Override
+    public List<Tag> listTag(String ids) {
+        return tagRepository.findAllById(convertToList(ids));
+    }
+
+    //截取字符串，然后放到list中，目的是在标签的存储时需要存储多个，吧多个标签id进行连接
+    private List<Long> convertToList(String ids){
+        List<Long> list = new ArrayList<>();
+        if("".equals(ids) && ids != null){
+            String[] idarray = ids.split(",");
+            for(int i= 0;i<idarray.length;i++){
+                list.add(Long.valueOf(idarray[i]));
+            }
+        }
+        return list;
+
     }
 
     @Transactional
