@@ -62,7 +62,7 @@ public class TagServiceImpl implements TagService {
     //截取字符串，然后放到list中，目的是在标签的存储时需要存储多个，吧多个标签id进行连接
     private List<Long> convertToList(String ids){
         List<Long> list = new ArrayList<>();
-        if("".equals(ids) && ids != null){
+        if(!"".equals(ids) && ids != null){
             String[] idarray = ids.split(",");
             for(int i= 0;i<idarray.length;i++){
                 list.add(Long.valueOf(idarray[i]));

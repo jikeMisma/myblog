@@ -49,6 +49,8 @@ public class Blog {
     @Transient
     private String tagIds;
 
+    private String description;
+
     public Blog() {
 
     }
@@ -197,6 +199,14 @@ public class Blog {
         this.tagIds = tagIds;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     //初始化
     public void init(){
 
@@ -237,6 +247,12 @@ public class Blog {
                 ", recommened=" + recommened +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
+                ", type=" + type +
+                ", tages=" + tages +
+                ", user=" + user +
+                ", comments=" + comments +
+                ", tagIds='" + tagIds + '\'' +
+                ", description='" + description + '\'' +
                 '}';
     }
 }

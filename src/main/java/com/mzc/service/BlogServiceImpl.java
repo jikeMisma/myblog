@@ -4,6 +4,7 @@ import com.mzc.ClassNotFoundException;
 import com.mzc.dao.BlogRepository;
 import com.mzc.po.Blog;
 import com.mzc.po.Type;
+import com.mzc.util.MyBeanUtiles;
 import com.mzc.vo.BlogQuery;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,7 +82,7 @@ public class BlogServiceImpl implements  BlogService {
             throw new ClassNotFoundException("该博客不存在");
 
         }
-        BeanUtils.copyProperties(blog,b);
+        BeanUtils.copyProperties(blog,b, MyBeanUtiles.getNullPropertyNames(blog));
         return blogRepository.save(b);
     }
 
