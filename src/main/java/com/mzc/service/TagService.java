@@ -23,6 +23,8 @@ public interface TagService {
 
     List<Tag> listTag();
 
+    List<Tag> lsitTagTop(Integer size);
+
     List<Tag> listTag(String ids);
 
     Tag updateTag(Long id, Tag tag);
