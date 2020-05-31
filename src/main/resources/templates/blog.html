@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html>
-	<head>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+	<head th:replace="_fragements :: head(~{::title})">
 		<meta charset="utf-8">
 		<title>博客详情</title>
 		<meta name="viewport" content="width = device-width,initial-scale=1.0" />
@@ -15,7 +15,7 @@
 	</head>
 	<body>
 		<!-- 导航 -->
-		<nav class="ui inverted attached segment m-padded-tb-min m-shadow-small">
+		<nav th:replace="_fragements :: menu(1)" class="ui inverted attached segment m-padded-tb-min m-shadow-small">
 			<div class="ui container">
 				<div class="ui inverted secondary stackable menu">
 					<h2 class="ui teal header item">Blog</h2>
@@ -44,33 +44,33 @@
 				<div class="ui top attached segment">
 					<div class="ui horizontal link list">
 						<div class="item">
-							<img class="ui avatar image" src="static/images/zhanwei.jpg" />
+							<img class="ui avatar image" src="static/images/zhanwei.jpg"  th:src="@{${blog.user.avatar}}"/>
 							<div class="content">
-								<a class="header">马志成</a>
+								<a class="header" th:text="${blog.user.nickname}">马志成</a>
 							</div>
 						</div>
 						<div class="item">
-							<i class="calendar icon"></i>2020-10-2
+							<i class="calendar icon"></i><span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}">2020-10-2</span>
 						</div>
 						<div class="item">
-							<i class="eye icon"></i>1254
+							<i class="eye icon"></i><span th:text="${blog.views}">1254</span>
 						</div>
 					</div>
 				</div>
 				<div class="ui attached segment">
 					<!-- 图片区域 -->
-					<img src="static/images/zhanwei.jpg" class="ui rounded fluid image" />
+					<img src="static/images/zhanwei.jpg" class="ui rounded fluid image" th:src="@{${blog.firstPicture}}" />
 				</div>
 				<div class="ui attached padded segment">
 					<!-- 内容 -->
 					<div class="ui right aligned basic segment">
-						<div class="ui orange basic label">
+						<div class="ui orange basic label" th:text="${blog.flag}">
 							原创
 						</div>
 					</div>
-					<h2 class="ui center aligned header">互联网大厂纷纷裁员，未毕业的你是否做好了顺利就业的准备？</h2>
+					<h2 class="ui center aligned header" th:text="${blog.title}">互联网大厂纷纷裁员，未毕业的你是否做好了顺利就业的准备？</h2>
 					
-					<div id="content " class="typo js-toc-content typo-selection m-padded-lr-repensive m-padded-tn-large">
+					<div id="content " class="typo js-toc-content typo-selection m-padded-lr-repensive m-padded-tn-large" th:text="${blog.content}">
 						<pre><code class="language-css">p { color: red }</code></pre>
 						<h2 id="section1">一</h2>
 						<p>自一月疫情的影响，使得各个行业的发展都不景气。互联网行业尤为严重，不论是还在刚起步的科技公司还是BATJ这样的大厂，都有了相应的人员缩减和招聘缩减（大家对比去年的或者前年的招聘职位数量和今年的就可以看到）。</p>
@@ -90,7 +90,7 @@
 					</div>
 					<!-- 标签 -->
 					<div class="m-padded-lr-repensive">
-						<div class="ui basic teal left pointing label">方法论</div>
+						<div class="ui basic teal left pointing label" th:each="tag : ${blog.tages}" th:text="${tag.name}">方法论</div>
 					</div>
 					
 					<!-- 赞赏 -->
@@ -102,11 +102,11 @@
 						<div class="ui orange basic label">
 							<div class="ui images" style="font-size: inherit;">
 								<div class="image">
-									<img src="static/images/wecaht.png" class="ui rounded bordered image" style="width: 120px;"/>
+									<img src="static/images/wecaht.png" th:src="@{/images/wecaht.png}" class="ui rounded bordered image" style="width: 120px;"/>
 									<div>支付宝</div>
 								</div>
 								<div class="image">
-									<img src="static/images/wecaht.png" class="ui rounded bordered image" style="width: 120px;"/>
+									<img src="static/images/wecaht.png" th:src="@{/images/wecaht.png}" class="ui rounded bordered image" style="width: 120px;"/>
 									<div>微信</div>
 								</div>
 							</div>
@@ -119,14 +119,14 @@
 					<div class="ui middle aligned grid">
 						<div class="ui eleven wide column">
 							<div class="list">
-								<li>作者：马志成（联系作者）</li>
-								<li>发表时间：2020-10-2 09:08</li>
+								<li>作者：<span th:text="${blog.user.nickname}">马志成</span><a href="#" th:href="@{/about}" target="_blank">（联系作者）</a>（联系作者）</li>
+								<li>发表时间：<span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}">2020-10-2 09:08</span></li>
 								<li>版权声明：自由转载，非商用-非衍生-保持署名（创意共享30个许可证）</li>
 								<li>公共号转载请在文末添加作者公众号二维码</li>
 							</div>
 						</div>
 						<div class="ui five wide column">
-							<img src="static/images/wecaht.png" class="ui right floated rounded borderd image" style="width: 110px;" />
+							<img src="static/images/wecaht.png" th:src="@{/images/wecaht.png}" class="ui right floated rounded borderd image" style="width: 110px;" />
 						</div>
 					</div>
 				</div>
@@ -298,9 +298,9 @@
 		
 		<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
-		<script src="../static/lib/prism/prism.js"></script>
-		<script src="../static/lib/tocbot/tocbot.min.js"></script>
-		<script src="../static/lib/qrcode/qrcode.min.js"></script>
+		<script src="../static/lib/prism/prism.js" th:src="@{/lib/prism/prism.js}"></script>
+		<script src="../static/lib/tocbot/tocbot.min.js"  th:src="@{/lib/tocbot/tocbot.min.js}"></script>
+		<script src="../static/lib/qrcode/qrcode.min.js"  th:src="@{/lib/qrcode/qrcode.min.js}"></script>
 		<script src="//cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>
 		
 		<script>
